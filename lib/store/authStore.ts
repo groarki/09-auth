@@ -4,7 +4,8 @@ import { persist } from 'zustand/middleware'
 
 export type AuthStoreType = {
   isAuthenticated: boolean
-  user: User | null
+  user: User | null;
+  setIsAuthenticated: (value: boolean) => void;
   setUser: (user: User) => void
   clearAuth: () => void
 }
@@ -14,6 +15,7 @@ export const useAuth = create<AuthStoreType>()(
     (set) => ({
       isAuthenticated: false,
       user: null,
+      setIsAuthenticated: (value) => set({ isAuthenticated: value }),
       setUser: (user: User) => set({ user, isAuthenticated: true }),
       clearAuth: () =>
         set({
@@ -22,7 +24,7 @@ export const useAuth = create<AuthStoreType>()(
         }),
     }),
     {
-      name: 'auth-storage', // назва ключа в localStorage
+      name: 'auth-storage', 
     }
   )
 )

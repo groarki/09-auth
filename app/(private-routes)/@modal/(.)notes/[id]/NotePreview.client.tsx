@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { getSingleNote } from "@/lib/api/clientApi";
 
-export default function NotesPreviewClient({ noteId }: { noteId: number }) {
+export default function NotesPreviewClient({ noteId }: { noteId: string }) {
   const router = useRouter();
   const onClose = () => { router.back(); };
 

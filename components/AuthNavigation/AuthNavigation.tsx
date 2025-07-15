@@ -8,7 +8,6 @@ import { useRouter } from 'next/navigation'
 
 const AuthNavigation = () => {
   const { isAuthenticated, clearAuth } = useAuth()
-  console.log(isAuthenticated);
   const router = useRouter()
 
   const handleLogOut = async () => {

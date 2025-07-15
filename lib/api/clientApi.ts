@@ -1,7 +1,7 @@
-import { fetchNotesResponse, LoginRequest, NewNote, Note, RegisterRequest, ServerBoolResponse, User } from "@/types/note";
+import { EditUser, fetchNotesResponse, LoginRequest, NewNote, Note, RegisterRequest, ServerBoolResponse, User } from "@/types/note";
 import nextServer from "./api";
 
-export async function fetchNotes(searchText: string, page: number, tag?: string) {
+export async function fetchNotes(searchText: string, page: number, tag?: string): Promise<fetchNotesResponse> {
     const res = await nextServer.get<fetchNotesResponse>("/notes", {
         params: {
             page,
@@ -13,7 +13,7 @@ export async function fetchNotes(searchText: string, page: number, tag?: string)
     return res.data
 };
 
-export const getSingleNote = async (id: number) => {
+export const getSingleNote = async (id: string) => {
     const res = await nextServer.get<Note>(`/notes/${id}`);
 
     return res.data;
@@ -25,7 +25,7 @@ export async function createNote(newNote: NewNote) {
       return res.data
 };
   
-export async function deleteNote(id: number) {
+export async function deleteNote(id: string) {
     const res = await nextServer.delete<Note>(`/notes/${id}`);
      return res.data
 };
@@ -51,6 +51,11 @@ export const checkSession = async () => {
 };
 
 export const getMe = async () => {
-    const { data } = await nextServer<User>(`/auth/me`)
+    const { data } = await nextServer<User>(`/users/me`)
     return data
+};
+
+export const editUser = async (user: EditUser): Promise<User> => {
+  const response = await nextServer.patch<User>("/users/me", user);
+  return response.data;
 };

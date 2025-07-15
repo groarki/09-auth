@@ -3,19 +3,26 @@
 import css from "./SingIn.module.css"
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { login } from '@/lib/api/clientApi';
+import { getMe, login } from '@/lib/api/clientApi';
 import { LoginRequest } from "@/types/note";
+import { useAuth } from "@/lib/store/authStore";
 
 const SignIn = () => {
   const router = useRouter();
   const [error, setError] = useState('');
+ const setIsAuthenticated = useAuth((state) => state.setIsAuthenticated);
+const setUser = useAuth((state) => state.setUser);
 
+  
   const handleSubmit = async (formData: FormData) => {
     try {
       const formValues = Object.fromEntries(formData) as LoginRequest;
       const res = await login(formValues);
       if (res) {
         router.push('/profile');
+        setIsAuthenticated(true);
+        const user = await getMe();
+        setUser(user);
       } else {
         setError('Invalid email or password');
       }

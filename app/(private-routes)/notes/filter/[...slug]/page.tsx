@@ -1,6 +1,6 @@
-import { fetchNotes } from "@/lib/api/clientApi";
 import NotesClient from "./Notes.client";
 import { Metadata } from "next";
+import { fetchServerNotes } from "@/lib/api/serverApi";
 
 type NotesPageProps = {
     params: Promise<{ slug: string[] }>
@@ -38,7 +38,7 @@ const {slug} = await params;
 const category = slug[0] || "all";
 const tag = category === "all" ? "" : category;
 
-  const notes = await fetchNotes("", 1, tag);
+  const notes = await fetchServerNotes("", 1, tag);
 
     return <NotesClient notes={notes} currentTag={category} />;
 };

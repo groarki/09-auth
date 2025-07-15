@@ -2,12 +2,14 @@
 import css from "./SignUp.module.css"
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { register } from '@/lib/api/clientApi';
+import { getMe, register } from '@/lib/api/clientApi';
 import { RegisterRequest } from '@/types/note';
+import { useAuth } from "@/lib/store/authStore";
 
 const SignUp = () => {
   const router = useRouter();
   const [error, setError] = useState('');
+  const { setIsAuthenticated, setUser } = useAuth.getState();
 
   const handleSubmit = async (formData: FormData) => {
     try {
@@ -15,6 +17,9 @@ const SignUp = () => {
       const res = await register(formValues);
       if (res) {
         router.push('/profile');
+        setIsAuthenticated(true);
+        const user = await getMe();
+        setUser(user);
       } else {
         setError('Invalid email or password');
       }
