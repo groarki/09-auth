@@ -43,4 +43,14 @@ export const login = async (data: LoginRequest) => {
   
 export const logOut = async () => {
     await nextServer.post<ServerBoolResponse>(`/auth/logout`)
-  }
+};
+
+export const checkSession = async () => {
+    const { data } = await nextServer<ServerBoolResponse>(`/auth/session`)
+    return data.success
+};
+
+export const getMe = async () => {
+    const { data } = await nextServer<User>(`/auth/me`)
+    return data
+};
