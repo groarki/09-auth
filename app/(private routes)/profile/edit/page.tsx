@@ -44,18 +44,17 @@ const handleSubmit = async (formData: FormData) => {
                 <h1 className={css.formTitle}>Edit Profile</h1>
 
                 <Image
-                    src="/avatar.jpg"
+                      src={
+              user?.avatar ||
+              "https://ac.goit.global/fullstack/react/default-avatar.jpg"
+            }
                     alt="profile avatar"
                     width={120}
                     height={120}
                     className={css.avatar}
                 />
 
-                <form className={css.profileInfo} onSubmit={(e) => {
-                    e.preventDefault();
-                    const formData = new FormData(e.currentTarget);
-                    handleSubmit(formData)
-                }}>
+                <form className={css.profileInfo} action={handleSubmit}>
                     <div className={css.usernameWrapper}>
                         <label htmlFor="username">Username:</label>
                         <input
@@ -63,6 +62,7 @@ const handleSubmit = async (formData: FormData) => {
                             name="username"
                             type="text"
                             className={css.input}
+                            defaultValue={user?.username}
                         />
                     </div>
 
@@ -72,7 +72,7 @@ const handleSubmit = async (formData: FormData) => {
                         <button type="submit" className={css.saveButton}>
                             Save
                         </button>
-                        <button type="button" className={css.cancelButton} onClick={() => router.push("/profile")}>
+                        <button type="button" className={css.cancelButton} onClick={() => router.back()}>
                             Cancel
                         </button>
                     </div>

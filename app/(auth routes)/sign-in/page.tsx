@@ -19,10 +19,10 @@ const setUser = useAuth((state) => state.setUser);
       const formValues = Object.fromEntries(formData) as LoginRequest;
       const res = await login(formValues);
       if (res) {
-        router.push('/profile');
         setIsAuthenticated(true);
         const user = await getMe();
         setUser(user);
+        router.push('/profile');
       } else {
         setError('Invalid email or password');
       }
