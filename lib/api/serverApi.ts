@@ -1,4 +1,5 @@
-import { fetchNotesResponse, Note, ServerBoolResponse, User } from '@/types/note'
+import { fetchNotesResponse, Note } from '@/types/note'
+import {ServerBoolResponse, User} from '@/types/user'
 import { cookies } from 'next/headers'
 import nextServer from './api'
 

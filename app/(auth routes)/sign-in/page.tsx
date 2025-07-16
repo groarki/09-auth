@@ -4,7 +4,7 @@ import css from "./SingIn.module.css"
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { getMe, login } from '@/lib/api/clientApi';
-import { LoginRequest } from "@/types/note";
+import { LoginRequest } from "@/types/user";
 import { useAuth } from "@/lib/store/authStore";
 
 const SignIn = () => {

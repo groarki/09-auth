@@ -1,5 +1,6 @@
-import { EditUser, fetchNotesResponse, LoginRequest, NewNote, Note, RegisterRequest, ServerBoolResponse, User } from "@/types/note";
+import {  fetchNotesResponse, NewNote, Note} from "@/types/note";
 import nextServer from "./api";
+import { EditUser, RegisterRequest, ServerBoolResponse, User, LoginRequest } from "@/types/user";
 
 export async function fetchNotes(searchText: string, page: number, tag?: string): Promise<fetchNotesResponse> {
     const res = await nextServer.get<fetchNotesResponse>("/notes", {

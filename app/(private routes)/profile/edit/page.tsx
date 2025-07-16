@@ -4,7 +4,7 @@ import Image from 'next/image'
 import css from "./EditPage.module.css"
 import { useAuth } from '@/lib/store/authStore'
 import { useRouter } from 'next/navigation'
-import { EditUser } from '@/types/note'
+import { EditUser } from '@/types/user'
 import { editUser } from '@/lib/api/clientApi'
 
 const EditPage = () => {
