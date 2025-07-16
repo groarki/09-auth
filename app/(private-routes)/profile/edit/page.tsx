@@ -61,7 +61,6 @@ const handleSubmit = async (formData: FormData) => {
                         <input
                             id="username"
                             name="username"
-                            defaultValue={user?.username}
                             type="text"
                             className={css.input}
                         />

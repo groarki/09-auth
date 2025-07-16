@@ -45,9 +45,13 @@ export const logOut = async () => {
     await nextServer.post<ServerBoolResponse>(`/auth/logout`)
 };
 
-export const checkSession = async () => {
-    const { data } = await nextServer<ServerBoolResponse>(`/auth/session`)
-    return data.success
+export const checkSession = async (): Promise<boolean> => {
+  try {
+    const res = await nextServer.get<User | null>("/auth/session");
+    return !!res.data;
+  } catch {
+    return false;
+  }
 };
 
 export const getMe = async () => {
